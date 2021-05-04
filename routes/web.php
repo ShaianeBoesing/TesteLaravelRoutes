@@ -47,19 +47,33 @@ Route::get('/rotacomregras/{nome}/{n}', function ($nome,$n) {
 })  ->where('nome','[A-Za-z]+')
     ->where('n','[0-9]+');
 
-Route::prefix('/app')->group(function (){
+Route::prefix('/aplicacao')->group(function (){
 
     Route::get('/', function(){
-        return "Meu app";
-    });
+        return view("app");
+    })-> name('app');
 
     Route::get('/user', function(){
-        return "User";
-    });
+        return view("user");
+    })-> name('app-user');
 
     Route::get('/profile', function(){
-        return "Profile";
-    });
+        return view("profile");
+    })-> name('app-profile');
 
+});
 
+Route::get('/produtos', function (){
+    echo "<h1>Produtos</h1>";
+    echo "<ol>";
+    echo "<li>Item 1</li>";
+    echo "<li>Item 2</li>";
+    echo "<li>Item 3</li>";
+    echo "</ol>";
+})->name('meus-produtos');
+
+Route::redirect('todosprodutos1','produtos',301);
+
+Route::get('todosprodutos2',function (){
+    return redirect()->route('meus-produtos');
 });
