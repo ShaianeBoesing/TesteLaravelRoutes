@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,8 +72,13 @@ Route::get('/produtos', function (){
     echo "</ol>";
 })->name('meus-produtos');
 
-Route::redirect('todosprodutos1','produtos',301);
 
-Route::get('todosprodutos2',function (){
+Route::get('/todosprodutos2',function (){
     return redirect()->route('meus-produtos');
+})->name('produtos2');
+
+/////////////////////////////////////////////////////
+
+Route::post('/requisicoes', function (Request $request){
+    return "Hello, POST";
 });
