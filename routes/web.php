@@ -29,3 +29,19 @@ Route::get('/aplicacao/profile',  [\App\Http\Controllers\MeuControlador::class, 
 Route::get('/aplicacao/{n1}/{n2}',  [\App\Http\Controllers\MeuControlador::class, 'multiplicar'])->name('multiplicacao');
 
 Route::resource('/cliente', '\App\Http\Controllers\ClienteControlador'::class);
+
+Route::get('produtos', function (){
+    return view('outras.produtos');
+})->name('produtos');
+
+Route::get('departamentos', function (){
+    return view('outras.departamentos');
+})->name('departamentos');
+
+Route::get('opcoes/{opcao?}', function ($opcao=null){
+    return view('outras.opcoes', compact(['opcao']));
+})->name('opcoes');
+
+Route::get('bootstrap', function (){
+    return view ('outras.exemplo');
+});

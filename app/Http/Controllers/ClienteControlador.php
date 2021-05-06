@@ -33,8 +33,13 @@ class ClienteControlador extends Controller
      */
     public function index()
     {
+        $titulo = "Todos os Clientes";
+        $vazio = "Não há clientes para exibir";
         $clientes = session('clientes');
-        return view('clientes.index', ['clientes'=>$clientes]);
+        return view('clientes.index', compact('clientes', 'titulo', 'vazio'));
+            // ->with('clientes', $clientes)//varibale name, variable content
+            // ->with('titulo', $titulo);
+
     }
 
     /**
@@ -56,7 +61,11 @@ class ClienteControlador extends Controller
     public function store(Request $request)
     {
         $clientes = session('clientes');
-        $id = end($clientes)['id'] + 1;
+        if(empty($clientes)){
+            $id=0;
+        }else{
+            $id = end($clientes)['id'] + 1;
+        }
         $nome = $request->nome;
         $dados = ['id'=>$id, 'nome'=>$nome];
         $clientes[] = $dados;
